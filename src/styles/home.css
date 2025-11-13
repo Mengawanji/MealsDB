@@ -38,6 +38,31 @@
   background-color: #ff5252;
 }
 
+.meals-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px; 
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.message {
+  margin-top: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section-title {
+  font-size: 28px;
+  margin: 18px;
+  color: #000000;
+  text-align: center;
+  position: relative;
+  padding-bottom: 10px;
+}
+
 @media (max-width: 480px) {
   .recipe-grid {
     grid-template-columns: 1fr;

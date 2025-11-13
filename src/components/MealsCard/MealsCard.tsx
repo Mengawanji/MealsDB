@@ -1,22 +1,82 @@
-import styles from "./styles.module.css"
+import styles from "./styles.module.css";
 
-export default function MealsCard () {
+interface Meal {
+  strMeal: string;
+  strMealThumb: string;
+  strCategory: string;
+  strInstructions: string;
+  [key: string]: any;
+}
+
+interface MealsCardProps {
+  meal: Meal;
+}
+
+interface Ingredient {
+  name: string;
+  measure: string;
+}
+
+export default function MealsCard({ meal }: MealsCardProps) {
+
+    const ingredients: Ingredient[] = [];
+        for (let i = 1; i <= 20; i++) {
+            const ingredient = meal[`strIngredient${i}`]
+            const measure = meal[`strMeasure${i}`]
+
+        if (ingredient && ingredient.trim() !== "") {
+        ingredients.push({
+            name: ingredient,
+            measure: measure || "",
+        });
+        }
+    }
+
+    const displayInstruction = `${meal?.strInstructions}`
+
+    function limitOverviewByWords(text:string, maxWords:number) {
+        if (!text || text.trim() === '') {
+            return '';
+        }
+        const words = text.split(/\s+/).filter(Boolean);
+
+        if (words.length <= maxWords) {
+            return text;
+        }
+        const truncatedWords = words.slice(0, maxWords);
+
+        return truncatedWords.join(' ') + ' . . .';
+    }
+
+    const instructionsPreview =  limitOverviewByWords(displayInstruction , 30)
+
     return (
-        <div className={styles["container"]}>
-            <div className={styles["recipe-grid"]}>
-                <div className={styles["recipe-card"]}>
-                    <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Pancakes" className={styles["recipe-image"]}/>
-                    <div className={styles["recipe-content"]}>
-                        <h3 className={styles["recipe-title"]}>Fluffy Blueberry Pancakes</h3>
-                        <div className={styles["recipe-meta"]}>
-                            <span>⏱ 15 mins</span>
-                            <span>⭐ 4.7 (200)</span>
-                        </div>
-                        <p className={styles["recipe-description"]}>Light and fluffy pancakes loaded with fresh blueberries.</p>
-                        <a href="#" className={styles["recipe-button"]}>View Recipe</a>
-                    </div>
+        <div className={styles.container}>
+        <div className={styles["recipe-grid"]}>
+            <div className={styles["recipe-card"]}>
+            <img src={meal.strMealThumb} alt={meal.strMeal} className={styles["meal-image"]}  />
+            <div className={styles["meal-info"]}>
+                <h3 className={styles["meal-name"]}>{meal.strMeal}</h3>
+                <span className={styles["meal-category"]}>{meal.strCategory}</span>
+                <p className={styles["meal-instructions"]}>{instructionsPreview}</p>
+
+                <div className={styles["ingredients-title"]}>Key Ingredients:</div>
+                <div className={styles["ingredients-list"]}>
+                {ingredients.slice(0, 5).map((ing, index) => (
+                    <span key={index} className={styles["ingredient-tag"]}>
+                    {ing.name}
+                    </span>
+                ))}
+                {ingredients.length > 5 && (
+                    <span className={styles["ingredient-tag"]}>
+                    +{ingredients.length - 5} more
+                    </span>
+                )}
                 </div>
             </div>
+            </div>
         </div>
-    )
-}
+        </div>
+    );
+};
+
