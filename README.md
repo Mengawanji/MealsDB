@@ -1,73 +1,75 @@
-# React + TypeScript + Vite
+# MealsDB
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fast, modern recipe explorer built with React and TypeScript, powered by the [TheMealDB API](https://www.themealdb.com/api.php). Browse meals by name, explore full recipe details, ingredient lists, and watch step-by-step cooking videos on YouTube.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+- Search meals by name
+- View full recipe details — ingredients, measurements & instructions
+- Browse meals by category and cuisine/area
+- Direct YouTube links for video walkthroughs
+- Fast data fetching and caching with TanStack Query
+- Fully responsive — works great on mobile and desktop
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| Tool | Purpose |
+|---|---|
+| [React 19](https://react.dev/) | UI framework |
+| [TypeScript](https://www.typescriptlang.org/) | Type safety |
+| [Vite 7](https://vitejs.dev/) | Build tool & dev server |
+| [React Router v7](https://reactrouter.com/) | Client-side routing |
+| [TanStack Query v5](https://tanstack.com/query) | Data fetching & caching |
+| [ky](https://github.com/sindresorhus/ky) | HTTP client |
+| [TheMealDB API](https://www.themealdb.com/api.php) | Meals data source |
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🚀 Getting Started
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Installation
+
+```bash
+# 1. Clone the repository
+git clone git@github.com:Mengawanji/MealsDB.git
+cd mealsdb
+
+# 2. Install dependencies
+npm install
+
+# 3. Start the development server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The app will be running at **http://localhost:5173**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Available Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start the development server |
+---
+
+
+
+## 🌐 API
+
+This project uses the free tier of **[TheMealDB](https://www.themealdb.com/api.php)** — no API key required.
+
+Example endpoints used:
+
 ```
+Search meals by name:
+GET https://www.themealdb.com/api/json/v1/1/search.php?s={query}
+
+Lookup full meal details by ID:
+GET https://www.themealdb.com/api/json/v1/1/lookup.php?i={id}
+```
+
+---
