@@ -1,0 +1,319 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap');
+
+/* ── Custom Properties ──────────────────────────────────────── */
+:root {
+  --details-bg:          #faf8f5;
+  --details-surface:     #ffffff;
+  --details-accent:      #e85d3a;
+  --details-accent-soft: #fdf0ec;
+  --details-gold:        #c9962a;
+  --details-text:        #1a1611;
+  --details-muted:       #7a7060;
+  --details-border:      #e8e2d9;
+  --details-shadow-sm:   0 2px 8px rgba(26,22,17,.06);
+  --details-shadow-md:   0 8px 32px rgba(26,22,17,.10);
+  --details-shadow-lg:   0 20px 60px rgba(26,22,17,.14);
+  --details-radius:      16px;
+  --details-radius-sm:   8px;
+  --details-max-w:       860px;
+  --details-transition:  0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Back Button ────────────────────────────────────────────── */
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 28px 0 0 0;
+  padding: 10px 20px;
+  background: var(--details-surface);
+  border: 1.5px solid var(--details-border);
+  border-radius: 50px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--details-muted);
+  cursor: pointer;
+  transition: all var(--details-transition);
+  letter-spacing: 0.02em;
+  box-shadow: var(--details-shadow-sm);
+}
+
+.back-button:hover {
+  color: var(--details-accent);
+  border-color: var(--details-accent);
+  background: var(--details-accent-soft);
+  transform: translateX(-3px);
+  box-shadow: var(--details-shadow-md);
+}
+
+/* ── Hero Image ─────────────────────────────────────────────── */
+.meal-image {
+  display: block;
+  width: 100%;
+  max-width: var(--details-max-w);
+  height: 420px;
+  object-fit: cover;
+  border-radius: var(--details-radius);
+  margin: 28px auto 0;
+  box-shadow: var(--details-shadow-lg);
+  transition: transform var(--details-transition), box-shadow var(--details-transition);
+}
+
+.meal-image:hover {
+  transform: scale(1.005);
+  box-shadow: 0 28px 70px rgba(26,22,17,.18);
+}
+
+/* ── Info Card ──────────────────────────────────────────────── */
+.meal-info {
+  max-width: var(--details-max-w);
+  margin: 36px auto 60px;
+  background: var(--details-surface);
+  border-radius: var(--details-radius);
+  padding: 48px 52px;
+  box-shadow: var(--details-shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative top stripe */
+.meal-info::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--details-accent), var(--details-gold));
+  border-radius: var(--details-radius) var(--details-radius) 0 0;
+}
+
+/* ── Meal Name ──────────────────────────────────────────────── */
+.meal-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 900;
+  line-height: 1.15;
+  color: var(--details-text);
+  margin: 0 0 20px;
+  letter-spacing: -0.02em;
+}
+
+/* ── Category & Area Pills ──────────────────────────────────── */
+.meal-category,
+.meal-area {
+  display: inline-flex;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 50px;
+  padding: 6px 16px;
+  margin-right: 10px;
+  margin-bottom: 32px;
+}
+
+.meal-category {
+  background: var(--details-accent-soft);
+  color: var(--details-accent);
+  border: 1.5px solid rgba(232, 93, 58, 0.2);
+}
+
+.meal-area {
+  background: #f5f0e8;
+  color: var(--details-gold);
+  border: 1.5px solid rgba(201, 150, 42, 0.2);
+}
+
+/* ── Section Labels ─────────────────────────────────────────── */
+.ingredients-title,
+.instructions-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 20px;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--details-text);
+  margin: 36px 0 16px;
+  padding-left: 14px;
+  border-left: 3px solid var(--details-accent);
+  line-height: 1;
+}
+
+/* ── Ingredients Grid ───────────────────────────────────────── */
+.ingredients-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.ingredient-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--details-bg);
+  border: 1.5px solid var(--details-border);
+  border-radius: var(--details-radius-sm);
+  padding: 8px 14px;
+  font-size: 13.5px;
+  font-weight: 400;
+  color: var(--details-text);
+  line-height: 1;
+  transition: all var(--details-transition);
+  cursor: default;
+}
+
+.ingredient-tag:hover {
+  background: var(--details-accent-soft);
+  border-color: rgba(232, 93, 58, 0.3);
+  color: var(--details-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(232, 93, 58, 0.12);
+}
+
+/* ── Instructions ───────────────────────────────────────────── */
+.meal-instructions {
+  font-size: 15.5px;
+  font-weight: 300;
+  line-height: 1.85;
+  color: #3d3830;
+  margin: 0;
+  white-space: pre-line;
+  border-top: 1px solid var(--details-border);
+  padding-top: 20px;
+}
+
+/* ── YouTube Link ───────────────────────────────────────────── */
+.youtube-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 36px;
+  padding: 14px 28px;
+  background: var(--details-accent);
+  color: #fff;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: all var(--details-transition);
+  box-shadow: 0 4px 16px rgba(232, 93, 58, 0.35);
+}
+
+.youtube-link:hover {
+  background: #d44d2a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(232, 93, 58, 0.45);
+}
+
+.youtube-link:active {
+  transform: translateY(0);
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .meal-image {
+    height: 280px;
+    border-radius: var(--details-radius-sm);
+    margin: 20px 0 0;
+  }
+
+  .meal-info {
+    padding: 32px 24px;
+    margin: 20px 0 40px;
+    border-radius: var(--details-radius-sm);
+  }
+
+  .back-button {
+    margin: 20px 0 0 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .meal-image {
+    height: 220px;
+  }
+
+  .meal-info {
+    padding: 24px 18px;
+  }
+
+  .meal-name {
+    font-size: 26px;
+  }
+
+  .ingredient-tag {
+    font-size: 12.5px;
+    padding: 7px 12px;
+  }
+
+  .meal-instructions {
+    font-size: 14.5px;
+  }
+
+  .youtube-link {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Container layout to properly position the header actions row */
+.navigation-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+/* Base button styles */
+.favorite-details-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f1f2f6;
+  border: 1px solid #f16148;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #57606f;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.favorite-details-btn .heart-icon {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: #747d8c;
+  stroke-width: 2;
+  transition: transform 0.2s, fill 0.2s, stroke 0.2s;
+}
+
+/* Hover effects */
+.favorite-details-btn:hover {
+  background: #ffeaa7;
+  color: #ff4757;
+  border-color: #ff7675;
+}
+
+.favorite-details-btn:hover .heart-icon {
+  stroke: #ff4757;
+  transform: scale(1.1);
+}
+
+/* Active Favorited State */
+.favorite-details-btn.favorited {
+  background: #ff7675;
+  color: #ffffff;
+  border-color: #ff7675;
+}
+
+.favorite-details-btn.favorited .heart-icon {
+  fill: #ffffff;
+  stroke: #ffffff;
+}
