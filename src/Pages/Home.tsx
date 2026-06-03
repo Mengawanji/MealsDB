@@ -3,27 +3,39 @@ import { useState } from "react"
 import { useQuery } from "@tanstack/react-query"
 import Feature from "../components/Feature/Feature"
 import MealsCard from "../components/MealsCard/MealsCard"
-import { searchMeals as fetchMeals  } from "../services/api"
+import { searchMeals as fetchMeals } from "../services/api"
 import Category from "../components/Category/Category"
+
+const MEALS_PER_PAGE = 9;
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [submittedQuery, setSubmittedQuery] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
 
   const {
     data: meals,
     isLoading: isSearching,
     error: searchError,
-    refetch: refetchMeals,
   } = useQuery({
-    queryKey: ['meals', searchQuery],
-    queryFn: () => fetchMeals(searchQuery),
-    enabled: false,
+    queryKey: ['meals', submittedQuery],
+    queryFn: () => fetchMeals(submittedQuery),
+    enabled: !!submittedQuery,
   });
 
-  const handleSearch = (e:any) => {
-    e.preventDefault()
+  // Pagination logic
+  const totalMeals = meals?.length ?? 0;
+  const totalPages = Math.ceil(totalMeals / MEALS_PER_PAGE);
+  const paginatedMeals = meals?.slice(
+    (currentPage - 1) * MEALS_PER_PAGE,
+    currentPage * MEALS_PER_PAGE
+  );
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
     if (searchQuery.trim()) {
-      refetchMeals()
+      setSubmittedQuery(searchQuery.trim());
+      setCurrentPage(1);
     }
   };
 
@@ -33,6 +45,7 @@ export default function Home() {
   return (
     <>
       <Feature />
+
       <div className="search-container">
         <form className="search-box" onSubmit={handleSearch}>
           <input
@@ -46,18 +59,52 @@ export default function Home() {
         </form>
       </div>
 
-      {meals && meals.length > 0 ? (
-        <div className="meals-list"> 
-          {meals.map((singleMeal, index) => (
-            <MealsCard key={index} meal={singleMeal} /> 
-          ))}
-        </div>
+      {paginatedMeals && paginatedMeals.length > 0 ? (
+        <>
+          <div className="meals-list">
+            {paginatedMeals.map((singleMeal, index) => (
+              <MealsCard key={index} meal={singleMeal} />
+            ))}
+          </div>
+
+          {/* Pagination controls */}
+          {totalPages > 1 && (
+            <div className="pagination">
+              <button
+                className="pagination-btn"
+                onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+                disabled={currentPage === 1}
+              >
+                &larr; Prev
+              </button>
+
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <button
+                  key={page}
+                  className={`pagination-btn ${currentPage === page ? "pagination-btn--active" : ""}`}
+                  onClick={() => setCurrentPage(page)}
+                >
+                  {page}
+                </button>
+              ))}
+
+              <button
+                className="pagination-btn"
+                onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+                disabled={currentPage === totalPages}
+              >
+                Next &rarr;
+              </button>
+            </div>
+          )}
+        </>
       ) : (
-        <div className="container">
-            <h2 className="section-title"> Searching for a recipe!</h2>
+        <div>
+          {!submittedQuery && <Category />}
         </div>
       )}
-      <Category />
+
+      
     </>
   );
 }

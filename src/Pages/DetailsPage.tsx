@@ -21,7 +21,6 @@ export default function Details() {
   const navigate = useNavigate();
   const meal: Meal = location.state?.meal;
 
-  // Guard — if someone navigates here directly without state
   if (!meal) {
     return (
       <div className="container">
@@ -30,7 +29,6 @@ export default function Details() {
     );
   }
 
-  // Extract ingredients (same logic as MealsCard)
   const ingredients: Ingredient[] = [];
   for (let i = 1; i <= 20; i++) {
     const ingredient = meal[`strIngredient${i}`];
