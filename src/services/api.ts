@@ -9,18 +9,18 @@ export const api = ky.create({
 });
 
 interface Meal {
-  idMeal: string;
-  strMeal: string;
-  strCategory: string;
-  strArea: string;
-  strInstructions: string;
-  strMealThumb: string;
-  strYoutube: string;
-  [key: string]: string | null;
+  idMeal: string
+  strMeal: string
+  strCategory: string
+  strArea: string
+  strInstructions: string
+  strMealThumb: string
+  strYoutube: string
+  [key: string]: string | null
 }
 
 interface MealsResponse {
-  meals: Meal[] | null;
+  meals: Meal[] | null
 }
 
 export const searchMeals = async (query: string): Promise<Meal[]> => {
@@ -32,31 +32,22 @@ export const searchMeals = async (query: string): Promise<Meal[]> => {
 };
 
 
-export const getMealById = async (id: string): Promise<Meal | null> => {
-  const data = await api.get('lookup.php', {
-    searchParams: { i: id }
-  }).json<MealsResponse>();
-  
-  return data.meals?.[0] || null;
-};
 
-export const getRandomMeal = async (): Promise<Meal | null> => {
-  const data = await api.get('random.php').json<MealsResponse>();
-  return data.meals?.[0] || null;
-};
+interface FilteredMeal {
+    strMeal: string
+    strMealThumb: string
+    idMeal: string
+}
 
-export const getMealsByCategory = async (category: string): Promise<Meal[]> => {
-  const data = await api.get('filter.php', {
+interface CategoriesResponse {
+    meals: FilteredMeal[] | null
+}
+
+export const getMeals = async (category: string): Promise<FilteredMeal[]> => {
+  const data = await api.get('filter.php', { 
     searchParams: { c: category }
-  }).json<{ meals: Meal[] }>();
+  }).json<CategoriesResponse>()
   
-  return data.meals || [];
-};
+  return data.meals || []
+}
 
-export const getMealsByArea = async (area: string): Promise<Meal[]> => {
-  const data = await api.get('filter.php', {
-    searchParams: { a: area }
-  }).json<{ meals: Meal[] }>();
-  
-  return data.meals || [];
-};

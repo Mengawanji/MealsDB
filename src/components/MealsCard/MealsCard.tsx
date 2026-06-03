@@ -73,6 +73,9 @@ export default function MealsCard({ meal }: MealsCardProps) {
                     </span>
                 )}
                 </div>
+                <div className={styles["view-btn"]}>
+                    <a href="#" className={styles["recipe-button"]}>View Recipe</a>
+                </div>
             </div>
             </div>
         </div>

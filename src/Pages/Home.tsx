@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query"
 import Feature from "../components/Feature/Feature"
 import MealsCard from "../components/MealsCard/MealsCard"
 import { searchMeals as fetchMeals  } from "../services/api"
+import Category from "../components/Category/Category"
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -55,8 +56,8 @@ export default function Home() {
         <div className="container">
             <h2 className="section-title"> Searching for a recipe!</h2>
         </div>
-
       )}
+      <Category />
     </>
   );
 }
