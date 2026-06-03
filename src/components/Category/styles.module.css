@@ -99,7 +99,53 @@
     height: 250px;
   }
 }
+.image-wrapper {
+  position: relative;
+  width: 100%;
+}
 
+.favorite-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.85);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 0;
+  z-index: 2; /* Ensures the button layers cleanly over the image click target */
+}
+
+.heart-icon {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: #747d8c;
+  stroke-width: 2;
+  transition: transform 0.2s, fill 0.2s, stroke 0.2s;
+}
+
+.favorite-btn:hover .heart-icon {
+  transform: scale(1.1);
+  stroke: #ff4757;
+}
+
+/* Active Favorited Class Styles */
+.favorite-btn.favorited {
+  background: #ffffff;
+}
+
+.favorite-btn.favorited .heart-icon {
+  fill: #ff4757;
+  stroke: #ff4757;
+}
 
 
 

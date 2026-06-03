@@ -259,3 +259,61 @@
     justify-content: center;
   }
 }
+
+/* Container layout to properly position the header actions row */
+.navigation-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+/* Base button styles */
+.favorite-details-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f1f2f6;
+  border: 1px solid #f16148;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #57606f;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.favorite-details-btn .heart-icon {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: #747d8c;
+  stroke-width: 2;
+  transition: transform 0.2s, fill 0.2s, stroke 0.2s;
+}
+
+/* Hover effects */
+.favorite-details-btn:hover {
+  background: #ffeaa7;
+  color: #ff4757;
+  border-color: #ff7675;
+}
+
+.favorite-details-btn:hover .heart-icon {
+  stroke: #ff4757;
+  transform: scale(1.1);
+}
+
+/* Active Favorited State */
+.favorite-details-btn.favorited {
+  background: #ff7675;
+  color: #ffffff;
+  border-color: #ff7675;
+}
+
+.favorite-details-btn.favorited .heart-icon {
+  fill: #ffffff;
+  stroke: #ffffff;
+}
